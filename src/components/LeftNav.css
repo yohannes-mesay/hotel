@@ -1,0 +1,58 @@
+.navbar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 10%;
+  height: 100%;
+  background-color: #f3f3f3;
+  overflow: hidden;
+}
+
+.logo {
+  width: max-content;
+  height: max-content;
+  margin: 30px 0 100px;
+  font-size: 32px;
+  padding-left: 30px;
+  font-weight: 600;
+  color: var(--Green-text-color);
+}
+
+.links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 40px;
+}
+
+.links a {
+  color: var(--Green-text-color);
+  text-decoration: none;
+  flex-basis: 8%;
+  width: 100%;
+  padding: 20px 0 20px 40px;
+  
+  font-weight: 500;
+}
+.links a div{
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 7px;
+}
+.links a div p{
+  font-size: 16px;
+}
+.Topic{
+  padding-top: 10px;
+  padding-left: 30px;
+  font-weight: 500;
+}
+.links a.active {
+  background-color: #77d0b0;
+  color:black;
+}
