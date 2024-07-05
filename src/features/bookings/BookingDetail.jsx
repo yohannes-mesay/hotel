@@ -10,7 +10,6 @@ import ButtonGroup from 'ui/ButtonGroup';
 import Button from 'ui/Button';
 import Modal from 'ui/Modal';
 import ConfirmDelete from 'ui/ConfirmDelete';
-
 import { useBooking } from 'features/bookings/useBooking';
 import { useDeleteBooking } from './useDeleteBooking';
 import { useMoveBack } from 'hooks/useMoveBack';
