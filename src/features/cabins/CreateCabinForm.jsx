@@ -66,6 +66,7 @@ function CreateCabinForm() {
   function onSubmit(data) {
     mutate(data);
   }
+  
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <FormRow>
