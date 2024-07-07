@@ -66,7 +66,7 @@ function CreateCabinForm() {
   function onSubmit(data) {
     mutate(data);
   }
-  
+
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <FormRow>
@@ -95,7 +95,7 @@ function CreateCabinForm() {
       </FormRow>
 
       <FormRow>
-        <Label htmlFor="description">Description for website</Label>
+        <Label htmlFor="description">Description</Label>
         <Textarea
           type="number"
           id="description"
