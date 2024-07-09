@@ -1,4 +1,5 @@
-import supabase from "./supabase";
+import { SiUphold } from "react-icons/si";
+import supabase, { supabaseUrl } from "./supabase";
 
 export async function getCabins() {
   const { data, error } = await supabase.from("cabins").select("*");
@@ -20,6 +21,13 @@ export async function deleteCabin(id) {
   return data;
 }
 export async function createCabin(newCabin) {
+  const imageName = `${Math.random()}-${newCabin.image.name}`.replaceAll(
+    "/",
+    ""
+  );
+  
+  // https://hlfsvhzdyivtamdpcnlo.supabase.co/storage/v1/object/public/cabin-images/cabin_001.jpg
+  const imagePath=`${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`
   const { data, error } = await supabase
     .from("cabins")
     .insert([newCabin])
