@@ -1,3 +1,4 @@
+import { createClient } from "@supabase/supabase-js";
 import { SiUphold } from "react-icons/si";
 import supabase, { supabaseUrl } from "./supabase";
 
@@ -12,7 +13,6 @@ export async function getCabins() {
 }
 export async function deleteCabin(id) {
   const { data, error } = await supabase.from("cabins").delete().eq("id", id);
-  console.log("id", id);
   if (error) {
     console.error(error);
     throw new Error("Cabin could not be deleted");
@@ -25,12 +25,22 @@ export async function createCabin(newCabin) {
     "/",
     ""
   );
-  
+
   // https://hlfsvhzdyivtamdpcnlo.supabase.co/storage/v1/object/public/cabin-images/cabin_001.jpg
-  const imagePath=`${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`
+  const imagePath = `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
+  // Upload file using standard upload
+  const { error: errorImage } = await supabase.storage
+    .from("cabin-images")
+    .upload(imageName, newCabin.image);
+  if (errorImage) {
+    // await supabase.from("cabins").delete().eq("id", id);
+    console.error(errorImage);
+    throw new Error("Image could not uploaded and cabin isn't created");
+  }
+
   const { data, error } = await supabase
     .from("cabins")
-    .insert([newCabin])
+    .insert([{ ...newCabin, image: imagePath }])
     .select();
   if (error) {
     console.error(error);

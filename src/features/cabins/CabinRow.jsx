@@ -66,9 +66,14 @@ function CabinRow({ cabin }) {
       <div> fits up to {maxCapacity}</div>
       <Price>{formatCurrency(regularPrice)}</Price>
       <Discount>{formatCurrency(discount)}</Discount>
+      <div>
+        <button>
+          Edit
+        </button>
       <button onClick={() => mutate(id)} disabled={isDeleting}>
         Delete
       </button>
+      </div>
     </TableRow>
   );
 }
