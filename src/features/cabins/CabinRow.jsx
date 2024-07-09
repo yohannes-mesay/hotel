@@ -46,7 +46,6 @@ const Discount = styled.div`
   color: var(--color-green-700);
 `;
 function CabinRow({ cabin }) {
-
   const [showForm, setShowForm] = useState(false);
   const queryClient = useQueryClient();
   const { id, image, name, maxCapacity, regularPrice, discount, description } =
@@ -70,7 +69,11 @@ function CabinRow({ cabin }) {
         <Cabin>{name}</Cabin>
         <div> fits up to {maxCapacity}</div>
         <Price>{formatCurrency(regularPrice)}</Price>
-        <Discount>{formatCurrency(discount)}</Discount>
+        {discount ? (
+          <Discount>{formatCurrency(discount)}</Discount>
+        ) : (
+          <span>&mdash;</span>
+        )}
         <div>
           <button onClick={() => setShowForm((show) => !show)}>Edit</button>
           <button onClick={() => mutate(id)} disabled={isDeleting}>

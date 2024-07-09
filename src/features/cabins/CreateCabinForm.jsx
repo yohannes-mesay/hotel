@@ -10,6 +10,7 @@ import FormRow from "../../ui/FormRow";
 import { Textarea } from "../../ui/Textarea";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useCreateCabin } from "./useCreateCabin";
 
 const StyledFormRow = styled.div`
   display: grid;
@@ -55,17 +56,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
   });
   const { errors } = formState;
   const queryClient = useQueryClient();
-  const { isLoading: isCreating, mutate: createCabin } = useMutation({
-    mutationFn: createEditCabin,
-    onSuccess: () => {
-      toast.success("Cabin inserted successfully");
-      queryClient.invalidateQueries({
-        queryKey: ["cabins"],
-      });
-      reset();
-    },
-    onError: (err) => toast.error(err.message),
-  });
+  const { isCreating, createCabin } = useCreateCabin();
   const { isLoading: isEditing, mutate: editCabin } = useMutation({
     mutationFn: ({ newCabinData, id }) => createEditCabin(newCabinData, editId),
     onSuccess: () => {
@@ -82,7 +73,13 @@ function CreateCabinForm({ cabinToEdit = {} }) {
     const image = typeof data.image === "string" ? data.image : data.image[0];
     if (isEditingSession)
       editCabin({ newCabinData: { ...data, image }, id: editId });
-    else createCabin({ ...data, image: image });
+    else
+      createCabin(
+        { ...data, image: image },
+        {
+          onSuccess: (data) => reset(),
+        }
+      );
   }
   function onError(errors) {
     // console.log(errors);
@@ -148,7 +145,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
             required: "This field is required",
           })}
           defaultValue=""
-        />{" "}   
+        />{" "}
       </FormRow>
 
       <FormRow label="Cabin photo" error={errors?.image?.message}>
