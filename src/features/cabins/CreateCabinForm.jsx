@@ -11,6 +11,7 @@ import { Textarea } from "../../ui/Textarea";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useCreateCabin } from "./useCreateCabin";
+import { useEditingCabin } from "./useEditingCabin";
 
 const StyledFormRow = styled.div`
   display: grid;
@@ -55,24 +56,18 @@ function CreateCabinForm({ cabinToEdit = {} }) {
     defaultValues: isEditingSession ? cabinToEdit : "",
   });
   const { errors } = formState;
-  const queryClient = useQueryClient();
   const { isCreating, createCabin } = useCreateCabin();
-  const { isLoading: isEditing, mutate: editCabin } = useMutation({
-    mutationFn: ({ newCabinData, id }) => createEditCabin(newCabinData, editId),
-    onSuccess: () => {
-      toast.success("Cabin successfully edited");
-      queryClient.invalidateQueries({
-        queryKey: ["cabins"],
-      });
-      reset();
-    },
-    onError: (err) => toast.error(err.message),
-  });
+  const { isEditing, editCabin } = useEditingCabin();
   const isWorking = isCreating || isEditing;
   function onSubmit(data) {
     const image = typeof data.image === "string" ? data.image : data.image[0];
     if (isEditingSession)
-      editCabin({ newCabinData: { ...data, image }, id: editId });
+      editCabin(
+        { newCabinData: { ...data, image }, id: editId },
+        {
+          onSuccess: () => reset(),
+        }
+      );
     else
       createCabin(
         { ...data, image: image },

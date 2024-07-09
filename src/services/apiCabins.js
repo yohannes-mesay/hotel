@@ -32,14 +32,6 @@ export async function createEditCabin(newCabin, id) {
     ? newCabin.image
     : `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
 
-  const { error: errorImage } = await supabase.storage
-    .from("cabin-images")
-    .upload(imageName, newCabin.image);
-  if (errorImage) {
-    // await supabase.from("cabins").delete().eq("id", id);
-    console.error(errorImage);
-    throw new Error("Image could not uploaded and cabin isn't created");
-  }
   let query = supabase.from("cabins");
   if (!id) query = query.insert([{ ...newCabin, image: imagePath }]);
   if (id) query = query.update({ ...newCabin, image: imagePath }).eq("id", id);
@@ -50,6 +42,16 @@ export async function createEditCabin(newCabin, id) {
     console.error(error);
     throw new Error("Cabin could not be deleted");
   }
+  if (hasImagePath) return data;
+  const { error: errorImage } = await supabase.storage
+    .from("cabin-images")
+    .upload(imageName, newCabin.image);
+  if (errorImage) {
+    // await supabase.from("cabins").delete().eq("id", id);
+    console.error(errorImage);
+    throw new Error("Image could not uploaded and cabin isn't created");
+  }
+
   console.log(data);
   return data;
 }
