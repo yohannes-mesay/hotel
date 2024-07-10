@@ -45,7 +45,7 @@ const variations = {
     &:hover {
       background-color: var(--color-red-800);
     }
-  `,  
+  `,
 };
 
 const Button = styled.button`
