@@ -13,3 +13,12 @@ const StyledSelect = styled.select`
   font-weight: 500;
   box-shadow: var(--shadow-sm);
 `;
+function Select({options}) {
+  return (
+    <StyledSelect>
+      
+    </StyledSelect>
+  )
+}
+
+export default Select
