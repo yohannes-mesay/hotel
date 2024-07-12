@@ -9,11 +9,11 @@ function Cabins() {
     <>
       <Row type="horizontal">
         <Heading as="h1">All cabins</Heading>
-      <CabinTableOperations />
+        <CabinTableOperations />
       </Row>
 
       <Row>
-        <CabinTab le />
+        <CabinTable />
         <AddCabin />
       </Row>
     </>

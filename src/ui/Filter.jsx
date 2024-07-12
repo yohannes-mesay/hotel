@@ -46,8 +46,8 @@ function Filter({ filterField, options }) {
       {options.map((option) => (
         <FilterButton
           key={option.value}
-          active={param === option.val && true}
-          onClick={() => handleClick(option.val)}
+          active={param === option.value && true}
+          onClick={() => handleClick(option.value)}
         >
           {option.label}
         </FilterButton>
