@@ -4,6 +4,7 @@ import Spinner from "../ui/Spinner";
 import Row from "../ui/Row";
 import BookingsTable from "../features/bookings/BookingTable";
 import BookingTableOperations from "../features/bookings/BookingTableOperations";
+import Pagination from "../ui/Pagination";
 function Bookings() {
   const { bookings, isLoading } = useBookings();
   console.log(bookings);
@@ -15,6 +16,7 @@ function Bookings() {
         <BookingTableOperations />{" "}
       </Row>
       <BookingsTable />
+      <Pagination />
     </>
   );
 }
