@@ -62,7 +62,7 @@ function Pagination({count}) {
   return (
     <StyledPagination>
       <P>
-        Showing <span>1</span> to <span>10</span> of <span>23</span> results
+        Showing <span>1</span> to <span>{count}</span> of <span>23</span> results
       </P>
       <Buttons>
         <PaginationButton>

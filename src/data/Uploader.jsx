@@ -7,13 +7,6 @@ import { bookings } from "./data-bookings";
 import { cabins } from "./data-cabins";
 import { guests } from "./data-guests";
 
-// const originalSettings = {
-//   minBookingLength: 3,
-//   maxBookingLength: 30,
-//   maxGuestsPerBooking: 10,
-//   breakfastPrice: 15,
-// };
-
 async function deleteGuests() {
   const { error } = await supabase.from("guests").delete().gt("id", 0);
   if (error) console.log(error.message);
@@ -134,25 +127,14 @@ export function Uploader() {
         textAlign: "center",
       }}
     >
-      <h3>DEV AREA</h3>
-
-      <Button
-        onClick={uploadAll}
-        // To prevent accidental clicks. Remove to run once!
-        disabled={isLoading}
-        // disabled={true}
-      >
-        Upload ALL sample data
+      <Button onClick={uploadAll} disabled={isLoading}>
+        Upload data
       </Button>
-      <p>Only run this only once!</p>
-      <p>
-        <em>(Cabin images need to be uploaded manually)</em>
-      </p>
+
       <hr />
       <Button onClick={uploadBookings} disabled={isLoading}>
-        Upload CURRENT bookings
+        Upload bookings
       </Button>
-      <p>You can run this every day you develop the app</p>
     </div>
   );
 }

@@ -16,7 +16,7 @@ function Bookings() {
         <BookingTableOperations />{" "}
       </Row>
       <BookingsTable />
-      <Pagination />
+      <Pagination count={10}/>
     </>
   );
 }
