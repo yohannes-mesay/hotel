@@ -57,12 +57,18 @@ const PaginationButton = styled.button`
     color: var(--color-brand-50);
   }
 `;
-function Pagination({count}) {
-  useSearchParams();
+function Pagination({ count }) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentPage = !searchParams.get("page")
+    ? 1
+    : Number(searchParams.get("page"));
+  function nextPage() {}
+  function prevPage() {}
   return (
     <StyledPagination>
       <P>
-        Showing <span>1</span> to <span>{count}</span> of <span>23</span> results
+        Showing <span>1</span> to <span>{count}</span> of <span>23</span>{" "}
+        results
       </P>
       <Buttons>
         <PaginationButton>
